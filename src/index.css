@@ -1,0 +1,310 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tagmentia Design System - All colors, gradients, fonts, and animations defined here. 
+All colors MUST be HSL for proper theming.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 215 25% 27%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+
+    /* Tagmentia Brand Colors */
+    --primary: 237 79% 62%; /* #545DEA - Main brand purple */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 237 79% 72%;
+
+    --secondary: 215 20% 95%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 215 20% 95%;
+    --muted-foreground: 215 15% 58%;
+
+    /* Gradient Category Colors - New Palette */
+    --gradient-blue-ocean: linear-gradient(135deg, hsl(210, 100%, 60%), hsl(220, 80%, 25%));
+    --gradient-lime-forest: linear-gradient(135deg, hsl(75, 85%, 55%), hsl(85, 60%, 25%));
+    --gradient-green-emerald: linear-gradient(135deg, hsl(145, 80%, 45%), hsl(155, 90%, 20%));
+    --gradient-teal-navy: linear-gradient(135deg, hsl(185, 85%, 45%), hsl(210, 100%, 15%));
+    --gradient-purple-cosmic: linear-gradient(135deg, hsl(260, 70%, 65%), hsl(270, 80%, 35%));
+    --gradient-cyan-azure: linear-gradient(135deg, hsl(185, 100%, 60%), hsl(205, 90%, 45%));
+    --gradient-lime-vibrant: linear-gradient(135deg, hsl(75, 100%, 65%), hsl(95, 80%, 35%));
+    --gradient-red-fire: linear-gradient(180deg, hsl(0, 85%, 55%), hsl(0, 90%, 35%));
+    --gradient-orange-sunset: linear-gradient(180deg, hsl(45, 100%, 55%), hsl(15, 90%, 50%));
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 20% 89%;
+    --input: 215 20% 89%;
+    --ring: 237 79% 62%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(215 20% 97%));
+    
+    /* Shadows */
+    --shadow-card: 0 2px 8px -2px hsl(var(--primary) / 0.1);
+    --shadow-elevated: 0 8px 24px -4px hsl(var(--primary) / 0.15);
+    --shadow-fab: 0 4px 16px -2px hsl(var(--primary) / 0.25);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 1rem;
+  }
+  
+  .dark {
+    --background: 215 30% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 215 30% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 215 30% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 237 79% 68%;
+    --primary-foreground: 215 30% 8%;
+    --primary-glow: 237 79% 78%;
+
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 215 25% 18%;
+    --muted-foreground: 215 15% 65%;
+
+    --destructive: 0 75% 58%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 215 25% 18%;
+    --input: 215 25% 18%;
+    --ring: 237 79% 68%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    /* Enable safe area insets support */
+    /* Safe area values are available via env() CSS variables */
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
+  
+  /* Utility classes */
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* Phone Input Styles */
+  .PhoneInput {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 2.5rem;
+    border-radius: calc(var(--radius) - 2px);
+    border: 1px solid hsl(var(--input));
+    background-color: hsl(var(--background));
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    transition: var(--transition-smooth);
+  }
+
+  .PhoneInput:focus-within {
+    outline: none;
+    ring: 2px;
+    ring-color: hsl(var(--ring));
+    ring-offset: 2px;
+    ring-offset-color: hsl(var(--background));
+  }
+
+  .PhoneInput--focus {
+    outline: none;
+    ring: 2px;
+    ring-color: hsl(var(--ring));
+    ring-offset: 2px;
+  }
+
+  .PhoneInputCountrySelect {
+    margin-right: 0.5rem;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .PhoneInputCountrySelect:focus {
+    outline: none;
+  }
+
+  .PhoneInputCountrySelectArrow {
+    margin-left: 0.25rem;
+    opacity: 0.5;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .PhoneInputInput {
+    border: none;
+    background: transparent;
+    font-size: 0.875rem;
+    flex: 1;
+    outline: none;
+    color: hsl(var(--foreground));
+  }
+
+  .PhoneInputInput::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .PhoneInput--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .dark .PhoneInput {
+    background-color: hsl(var(--background));
+    border-color: hsl(var(--input));
+  }
+
+  /* Android/OnePlus Safe Area Insets - Enhanced for Android 13+ */
+  .safe-area-inset {
+    /* Top safe area for status bar (notch/punch-hole) */
+    padding-top: env(safe-area-inset-top, 0px);
+    /* Bottom safe area for navigation bar */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    /* Left safe area for edge gestures */
+    padding-left: env(safe-area-inset-left, 0px);
+    /* Right safe area for edge gestures */
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  .pt-safe {
+    /* Use exact safe area inset value - no minimum */
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.5rem);
+  }
+
+  .pl-safe {
+    padding-left: max(env(safe-area-inset-left, 0px), 1rem);
+  }
+
+  .pr-safe {
+    padding-right: max(env(safe-area-inset-right, 0px), 1rem);
+  }
+
+  /* Enhanced backdrop blur for Android/OnePlus devices */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* Enhanced transparency for Android share screens */
+  @supports (backdrop-filter: blur(8px)) {
+    .bg-background\/95 {
+      background-color: hsl(var(--background) / 0.95);
+    }
+    
+    .bg-card\/80 {
+      background-color: hsl(var(--card) / 0.80);
+    }
+  }
+
+  /* Android-specific animations for better performance */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-pulse-glow {
+      animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.25;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Enhanced touch targets for Android/OnePlus (minimum 48dp) */
+  /* Only apply to interactive buttons, exclude small indicator buttons */
+  @media (pointer: coarse) {
+    /* Apply min-size only to standard interactive buttons */
+    /* Exclude small indicator buttons and carousel dots */
+    button:not([aria-label*="slide"]):not([aria-label*="Go to slide"]):not([class*="w-2"][class*="h-2"]):not([class*="w-1"][class*="h-1"]),
+    .touch-target {
+      min-height: 48px;
+      min-width: 48px;
+    }
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Gradient Background (light blue to deep purple) - Diagonal from top-left to bottom-right -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#87CEEB"
+                android:endColor="#9370DB" />
+        </shape>
+    </item>
+    
+    <!-- Logo (centered) - White geometric "T" shape with rounded corners and triangle -->
+    <item
+        android:drawable="@drawable/logo_splash"
+        android:gravity="center" />
+    
+</layer-list>
+

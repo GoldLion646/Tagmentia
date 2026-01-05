@@ -1,0 +1,130 @@
+//
+//  ShareViewController.swift
+//  TagmentiaShareExtension
+//
+//  TEMPLATE: iOS Share Extension for Native Share Sheet Integration
+//
+//  INSTRUCTIONS:
+//  1. Open your iOS project in Xcode
+//  2. File → New → Target → Share Extension
+//  3. Name it "TagmentiaShareExtension"
+//  4. Replace the generated ShareViewController.swift with this code
+//  5. Configure App Groups in Xcode:
+//     - Target → Signing & Capabilities → + Capability → App Groups
+//     - Add: group.app.lovable.tagmentia (or your app group identifier)
+//  6. Ensure both main app and share extension use the same App Group
+//
+
+import UIKit
+import Social
+
+class ShareViewController: SLComposeServiceViewController {
+    
+    override func isContentValid() -> Bool {
+        // Validate that we have content to share
+        return true
+    }
+
+    override func didSelectPost() {
+        // This is called when the user taps "Post" in the share sheet
+        
+        guard let extensionItem = extensionContext?.inputItems.first as? NSExtensionItem,
+              let itemProvider = extensionItem.attachments?.first else {
+            // No content to share, close the extension
+            extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+            return
+        }
+
+        // Check if the shared item is a URL
+        if itemProvider.hasItemConformingToTypeIdentifier("public.url") {
+            itemProvider.loadItem(forTypeIdentifier: "public.url", options: nil) { [weak self] (item, error) in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    print("Error loading URL: \(error.localizedDescription)")
+                    self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                    return
+                }
+                
+                if let shareURL = item as? URL {
+                    // Encode the URL for the deep link
+                    let encodedURL = shareURL.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let appURL = URL(string: "tagmentia://add?url=\(encodedURL)")!
+                    
+                    // Open the main app with the deep link
+                    self.open(url: appURL)
+                } else if let urlString = item as? String,
+                          let shareURL = URL(string: urlString) {
+                    // Handle case where URL is passed as string
+                    let encodedURL = shareURL.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let appURL = URL(string: "tagmentia://add?url=\(encodedURL)")!
+                    self.open(url: appURL)
+                }
+                
+                // Complete the share extension request
+                self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+            }
+        } else if itemProvider.hasItemConformingToTypeIdentifier("public.text") {
+            // Handle plain text (might contain a URL)
+            itemProvider.loadItem(forTypeIdentifier: "public.text", options: nil) { [weak self] (item, error) in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    print("Error loading text: \(error.localizedDescription)")
+                    self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                    return
+                }
+                
+                if let text = item as? String {
+                    // Try to extract URL from text
+                    if let url = self.extractURL(from: text) {
+                        let encodedURL = url.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                        let appURL = URL(string: "tagmentia://add?url=\(encodedURL)")!
+                        self.open(url: appURL)
+                    }
+                }
+                
+                self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+            }
+        } else {
+            // Unsupported content type
+            extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+        }
+    }
+    
+    /**
+     * Extract URL from text string
+     */
+    private func extractURL(from text: String) -> URL? {
+        // Simple URL detection - look for http:// or https://
+        let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        let matches = detector?.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count))
+        
+        return matches?.first?.url
+    }
+    
+    /**
+     * Open URL in the main app
+     */
+    private func open(url: URL) {
+        var responder: UIResponder? = self
+        while responder != nil {
+            if let application = responder as? UIApplication {
+                application.open(url, options: [:]) { success in
+                    if !success {
+                        print("Failed to open URL: \(url)")
+                    }
+                }
+                return
+            }
+            responder = responder?.next
+        }
+    }
+
+    override func configurationItems() -> [Any]! {
+        // Return an array of configuration items to add to the share sheet
+        // For Tagmentia, we don't need additional configuration
+        return []
+    }
+}
+

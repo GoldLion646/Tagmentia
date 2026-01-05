@@ -1,0 +1,27 @@
+{
+  "name": "Tagmentia",
+  "short_name": "Tagmentia",
+  "description": "Organize and manage your video collections",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#9370DB",
+  "theme_color": "#9370DB",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "share_target": {
+    "action": "/add",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

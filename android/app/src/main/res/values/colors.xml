@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PWA Theme Colors - Matching Web App -->
+    <!-- Primary Purple: #545DEA (hsl(237 79% 62%)) -->
+    <color name="colorPrimary">#545DEA</color>
+    <color name="colorPrimaryDark">#3D45B8</color>
+    <color name="colorAccent">#545DEA</color>
+    
+    <!-- PWA Background Color: #9370DB -->
+    <color name="pwa_background">#9370DB</color>
+    <color name="pwa_theme">#9370DB</color>
+    
+    <!-- Web App Design System Colors -->
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_dark">#141B2E</color>
+    <color name="foreground_light">#3A4759</color>
+    <color name="foreground_dark">#F2F2F2</color>
+    
+    <!-- Card Colors -->
+    <color name="card_light">#FFFFFF</color>
+    <color name="card_dark">#1A2332</color>
+    
+    <!-- Status Bar Colors -->
+    <color name="status_bar_light">#9370DB</color>
+    <color name="status_bar_dark">#1A2332</color>
+    
+    <!-- Navigation Bar -->
+    <color name="navigation_bar">#000000</color>
+</resources>
+

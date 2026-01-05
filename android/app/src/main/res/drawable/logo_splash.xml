@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="280dp"
+    android:height="280dp"
+    android:viewportWidth="280"
+    android:viewportHeight="280">
+    
+    <!-- White geometric "T" logo shape - Modern abstract design -->
+    
+    <!-- Upper-left block (square-like) with rounded bottom-right corner -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,70 L110,70 L110,105 Q110,115 100,115 L80,115 Q70,115 70,105 Z" />
+    
+    <!-- Lower-right block (square-like) with rounded top-left corner -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M130,125 Q130,115 140,115 L170,115 Q180,115 180,125 L180,160 L150,160 L150,140 Q150,130 140,130 L130,130 Q130,125 130,125 Z" />
+    
+    <!-- Top-right triangle (play button/arrow pointing right) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M165,75 L185,90 L165,105 Z" />
+    
+</vector>
+

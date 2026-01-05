@@ -1,0 +1,133 @@
+project_id = "vgsavnlyathtlvrevtjb"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[auth]
+enabled = true
+port = 54322
+external_url = "http://127.0.0.1:54321"
+additional_redirect_urls = ["https://127.0.0.1:3000"]
+jwt_expiry = 3600
+enable_signup = true
+enable_confirmations = false
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = false
+
+[db]
+enabled = true
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[functions]
+enabled = true
+
+[functions.ai-summarize]
+verify_jwt = true
+
+[functions.ai-summaries]
+verify_jwt = true
+
+[functions.ai-regenerate]
+verify_jwt = true
+
+[functions.ai-video-summary]
+verify_jwt = true
+
+[functions.bulk-delete-users]
+verify_jwt = true
+
+[functions.cancel-subscription]
+verify_jwt = true
+
+[functions.check-reminders]
+verify_jwt = false
+
+[functions.check-subscription-status]
+verify_jwt = true
+
+[functions.create-subscription-checkout]
+verify_jwt = true
+
+[functions.customer-portal]
+verify_jwt = true
+
+[functions.delete-account]
+verify_jwt = true
+
+[functions.delete-user]
+verify_jwt = true
+
+[functions.fetch-metadata]
+verify_jwt = true
+
+[functions.get-video-transcript]
+verify_jwt = true
+
+[functions.manage-subscriptions]
+verify_jwt = true
+
+[functions.provision-demo-user]
+verify_jwt = true
+
+[functions.push-config]
+verify_jwt = false
+
+[functions.security-logger]
+verify_jwt = false
+
+[functions.security-monitor]
+verify_jwt = true
+
+[functions.send-help-feedback]
+verify_jwt = true
+
+[functions.send-push]
+verify_jwt = true
+
+[functions.stripe-env-check]
+verify_jwt = true
+
+[functions.stripe-verification]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.upload-screenshot]
+verify_jwt = true
+
+[functions.delete-screenshot]
+verify_jwt = true
+
+[functions.waitlist]
+verify_jwt = false
+
+[functions.save-shared-link]
+verify_jwt = true
+
+[functions.refresh-metadata]
+verify_jwt = true
+
+[functions.clear-rate-limits]
+verify_jwt = true
+
+[storage]
+enabled = true
+port = 54323
+file_size_limit = "50MiB"
+
+[analytics]
+enabled = false
+port = 54327
+vector_port = 54328
+# Setup BigQuery project to enable log viewer on local development stack.
+# See: https://supabase.com/docs/guides/getting-started/local-development#enabling-local-logging

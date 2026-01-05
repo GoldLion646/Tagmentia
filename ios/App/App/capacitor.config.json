@@ -1,0 +1,25 @@
+{
+	"appId": "app.lovable.tagmentia",
+	"appName": "Tagmentia",
+	"webDir": "dist",
+	"plugins": {
+		"App": {
+			"deepLinkingEnabled": true
+		}
+	},
+	"ios": {
+		"associatedDomains": [
+			"applinks:tagmentia.com",
+			"applinks:*.tagmentia.com"
+		],
+		"scheme": "tagmentia"
+	},
+	"android": {
+		"allowMixedContent": true
+	},
+	"packageClassList": [
+		"AppPlugin",
+		"ClipboardPlugin",
+		"LocalNotificationsPlugin"
+	]
+}

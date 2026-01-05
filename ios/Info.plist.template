@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TEMPLATE: Info.plist Configuration for Custom URL Schemes
+  
+  INSTRUCTIONS:
+  1. Open your iOS project in Xcode
+  2. Navigate to ios/App/App/Info.plist
+  3. Add the CFBundleURLTypes key if it doesn't exist
+  4. Add the tagmentia custom scheme configuration
+  5. Note: Universal Links are configured via Associated Domains capability in Xcode
+-->
+
+<!-- 
+  Add this to your Info.plist (inside the <dict> root element):
+  
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>tagmentia</string>
+      </array>
+      <key>CFBundleURLName</key>
+      <string>app.lovable.tagmentia</string>
+    </dict>
+  </array>
+-->
+
+<!-- 
+  EXAMPLE COMPLETE CFBundleURLTypes CONFIGURATION:
+  
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>tagmentia</string>
+      </array>
+      <key>CFBundleURLName</key>
+      <string>app.lovable.tagmentia</string>
+    </dict>
+  </array>
+-->
+
+<!-- 
+  ADDITIONAL XCODE CONFIGURATION REQUIRED:
+  
+  1. Enable Associated Domains:
+     - Target → Signing & Capabilities → + Capability → Associated Domains
+     - Add: applinks:tagmentia.com
+     - Add: applinks:*.tagmentia.com
+  
+  2. Configure App Groups (for Share Extension):
+     - Target → Signing & Capabilities → + Capability → App Groups
+     - Add: group.app.lovable.tagmentia (or your app group identifier)
+     - Ensure both main app and share extension use the same App Group
+-->
+

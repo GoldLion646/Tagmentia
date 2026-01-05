@@ -1,0 +1,91 @@
+//
+//  AppDelegate.swift
+//  Tagmentia
+//
+//  TEMPLATE: AppDelegate Configuration for Universal Links and Deep Links
+//
+//  INSTRUCTIONS:
+//  1. Open your iOS project in Xcode
+//  2. Navigate to ios/App/App/AppDelegate.swift
+//  3. Add the following method to handle Universal Links
+//  4. Ensure your Info.plist has CFBundleURLTypes configured (see Info.plist.template)
+//
+
+import UIKit
+import Capacitor
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+        return true
+    }
+
+    // MARK: - Universal Links and Deep Links
+    
+    /**
+     * Handle Universal Links (https://tagmentia.com/add?url=...)
+     * This method is called when the app is opened via a Universal Link
+     */
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        // Check if this is a Universal Link (web browsing activity)
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+           let url = userActivity.webpageURL {
+            
+            // Extract URL parameter and navigate to /add page
+            if url.path == "/add" || url.path.hasPrefix("/add") {
+                // Let Capacitor handle the URL
+                NotificationCenter.default.post(
+                    name: NSNotification.Name.CapacitorDidReceiveUniversalLink,
+                    object: nil,
+                    userInfo: ["url": url]
+                )
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    /**
+     * Handle custom URL schemes (tagmentia://add?url=...)
+     * This method is called when the app is opened via a custom scheme
+     */
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        
+        // Check if this is our custom scheme
+        if url.scheme == "tagmentia" {
+            // Extract URL parameter and navigate to /add page
+            if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+               let sharedUrl = components.queryItems?.first(where: { $0.name == "url" })?.value {
+                // Navigate to add page
+                NotificationCenter.default.post(
+                    name: NSNotification.Name.CapacitorOpenURL,
+                    object: nil,
+                    userInfo: ["url": url]
+                )
+                return true
+            }
+        }
+        
+        return false
+    }
+
+    // MARK: - UISceneSession Lifecycle (if using SceneDelegate)
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+    }
+}
+
